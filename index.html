@@ -251,7 +251,7 @@
 
                 <!-- Right Content: The HTML Form -->
                 <div class="bg-white md:w-7/12 p-8 md:p-12">
-                    <form id="coffeeOrderForm" class="space-y-6">
+                    <form id="coffeeOrderForm" class="space-y-6" name="submit-to-google-sheet">
                         
                         <!-- Name & Email Row -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -311,10 +311,14 @@
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
                         
-                        <!-- Success Message (Hidden by default) -->
+                        <!-- Success/Error Message (Hidden by default) -->
                         <div id="successMessage" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center text-sm font-medium">
                             <i class="fa-solid fa-circle-check mr-1 text-lg align-middle"></i>
                             Success! Your order has been placed. We will email your invoice shortly.
+                        </div>
+                        <div id="errorMessage" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-center text-sm font-medium">
+                            <i class="fa-solid fa-triangle-exclamation mr-1 text-lg align-middle"></i>
+                            Oops! Something went wrong. Please try again.
                         </div>
 
                     </form>
@@ -419,7 +423,7 @@
             }
         });
 
-        // Automatically select dropdown value when clicking "Select This Blend" on product cards
+        // Automatically select dropdown value when clicking "Select This Blend"
         function selectBlend(blendName) {
             const dropdown = document.getElementById('blendSelect');
             for(let i = 0; i < dropdown.options.length; i++) {
@@ -430,34 +434,49 @@
             }
         }
 
-        // Form Submission Logic
-        const form = document.getElementById('coffeeOrderForm');
+        // --- IMPORTANT: PASTE YOUR GOOGLE WEB APP URL HERE ---
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx2U8VBE6qc5_k-NKDcX3s3d2WiMSHDXQ0KjXzXG7-6R2N-9PUvXmxhwtm2Wi-egBl2/exec';
+        // -----------------------------------------------------
+
+        const form = document.forms['submit-to-google-sheet'];
         const submitBtn = document.getElementById('submitBtn');
         const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent page reload
-
-            // Change button state to show loading
+        form.addEventListener('submit', e => {
+            e.preventDefault(); // Stop normal form submission
+            
+            // Show loading state
             submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
             submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
 
-            // Simulate sending data (since we aren't hooked to a backend yet)
-            setTimeout(() => {
-                // Show success message
-                successMessage.classList.remove('hidden');
-                
-                // Reset form and button
-                form.reset();
-                submitBtn.innerHTML = '<span>Place Order Now</span><i class="fa-solid fa-arrow-right"></i>';
-                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
-
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                }, 5000);
-
-            }, 1500); // 1.5 second simulated loading time
+            // Send data to Google Sheets
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    // Success! Show message and clear form
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+                    
+                    // Reset button
+                    submitBtn.innerHTML = '<span>Place Order Now</span><i class="fa-solid fa-arrow-right"></i>';
+                    submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                    }, 5000);
+                })
+                .catch(error => {
+                    // Error happened
+                    console.error('Error!', error.message);
+                    errorMessage.classList.remove('hidden');
+                    
+                    // Reset button
+                    submitBtn.innerHTML = '<span>Place Order Now</span><i class="fa-solid fa-arrow-right"></i>';
+                    submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                });
         });
     </script>
 </body>

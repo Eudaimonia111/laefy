@@ -18,6 +18,7 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
+                        // Green theme
                         coffee: {
                             50: '#f0fdf4',
                             100: '#dcfce7',
@@ -42,6 +43,10 @@
             background-position: center;
             background-attachment: fixed;
         }
+        /* Custom radio button color */
+        input[type="radio"] {
+            accent-color: #16a34a;
+        }
     </style>
 </head>
 <body class="bg-coffee-50 text-gray-800 font-sans antialiased selection:bg-coffee-200 selection:text-coffee-900">
@@ -63,7 +68,6 @@
                     <a href="#home" class="text-gray-600 hover:text-coffee-600 font-medium transition-colors">Home</a>
                     <a href="#about" class="text-gray-600 hover:text-coffee-600 font-medium transition-colors">Our Story</a>
                     <a href="#products" class="text-gray-600 hover:text-coffee-600 font-medium transition-colors">Shop Coffee</a>
-                    <!-- Direct link to Google Form Section -->
                     <a href="#order" class="bg-coffee-600 text-white px-6 py-2.5 rounded-full font-medium hover:bg-coffee-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                         Order Now
                     </a>
@@ -105,7 +109,7 @@
                         Explore Our Blends
                     </a>
                     <a href="#order" class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-medium hover:bg-white/20 transition-all text-center text-lg">
-                        How to Order
+                        Order Online
                     </a>
                 </div>
             </div>
@@ -147,7 +151,7 @@
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-serif font-bold text-coffee-900 mb-4">Our Signature Roasts</h2>
                 <div class="w-24 h-1 bg-coffee-500 mx-auto rounded-full mb-6"></div>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of single-origin beans and artisanal blends. Order easily using our simple form.</p>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of single-origin beans and artisanal blends. Order easily using our simple form below.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -163,8 +167,8 @@
                         <div class="text-xs font-bold text-coffee-500 uppercase tracking-wider mb-2">Medium Roast</div>
                         <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Colombian Supremo</h3>
                         <p class="text-gray-600 mb-6 text-sm line-clamp-3">A perfectly balanced cup with notes of sweet chocolate, bright cherry, and a smooth caramel finish. Our daily favorite.</p>
-                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors">
-                            Select in Form
+                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors" onclick="selectBlend('Colombian Supremo')">
+                            Select This Blend
                         </a>
                     </div>
                 </div>
@@ -181,8 +185,8 @@
                         <div class="text-xs font-bold text-coffee-500 uppercase tracking-wider mb-2">Light Roast</div>
                         <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Ethiopian Yirgacheffe</h3>
                         <p class="text-gray-600 mb-6 text-sm line-clamp-3">A delicate, tea-like body bursting with floral aromas, bergamot, and sweet citrus zest. A true connoisseur's choice.</p>
-                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors">
-                            Select in Form
+                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors" onclick="selectBlend('Ethiopian Yirgacheffe')">
+                            Select This Blend
                         </a>
                     </div>
                 </div>
@@ -199,8 +203,8 @@
                         <div class="text-xs font-bold text-coffee-500 uppercase tracking-wider mb-2">Dark Roast</div>
                         <h3 class="text-2xl font-serif font-bold text-gray-900 mb-3">Midnight Espresso Blend</h3>
                         <p class="text-gray-600 mb-6 text-sm line-clamp-3">Bold, rich, and intense. Dark cocoa, molasses, and a hint of smokiness create the perfect base for your lattes and cappuccinos.</p>
-                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors">
-                            Select in Form
+                        <a href="#order" class="block w-full text-center bg-coffee-100 text-coffee-700 font-semibold py-3 rounded-xl hover:bg-coffee-600 hover:text-white transition-colors" onclick="selectBlend('Midnight Espresso Blend')">
+                            Select This Blend
                         </a>
                     </div>
                 </div>
@@ -208,52 +212,112 @@
         </div>
     </section>
 
-    <!-- Order / Google Form Section -->
+    <!-- Built-in Order Form Section -->
     <section id="order" class="py-24 bg-white relative overflow-hidden">
         <!-- Decorative elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-coffee-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 transform translate-x-1/2 -translate-y-1/2"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 transform -translate-x-1/2 translate-y-1/2"></div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="bg-coffee-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
                 
-                <!-- Left Content -->
-                <div class="p-10 md:p-12 md:w-3/5 text-white flex flex-col justify-center">
+                <!-- Left Content: Text -->
+                <div class="p-10 md:p-12 md:w-5/12 text-white flex flex-col justify-center border-b md:border-b-0 md:border-r border-coffee-800">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-coffee-200 text-sm font-medium w-max mb-6">
-                        <i class="fa-solid fa-clipboard-list"></i> Simple Ordering
+                        <i class="fa-solid fa-mug-hot"></i> Freshly Roasted
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">Ready to Order?</h2>
-                    <p class="text-coffee-200 mb-8 text-lg">
-                        We process all our orders securely through Google Forms to keep things simple and direct. Fill out your details, select your roasts, and we'll send you an invoice right away.
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">Place Your Order</h2>
+                    <p class="text-coffee-200 mb-8 text-lg leading-relaxed">
+                        Fill out the details, select your favorite roasts, and choose your preferred grind. We'll send an invoice right away.
                     </p>
                     
-                    <ul class="space-y-4 mb-10 text-coffee-100">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-coffee-400 text-xl"></i>
-                            <span>Select your favorite blends and quantities</span>
+                    <ul class="space-y-5 text-coffee-100 mt-auto">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-coffee-400 text-xl mt-1"></i>
+                            <div>
+                                <strong class="block text-white">Secure Processing</strong>
+                                <span class="text-sm opacity-80">Your details are kept completely private.</span>
+                            </div>
                         </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-coffee-400 text-xl"></i>
-                            <span>Choose whole bean or your preferred grind</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-coffee-400 text-xl"></i>
-                            <span>Secure invoice sent via email within 2 hours</span>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-coffee-400 text-xl mt-1"></i>
+                            <div>
+                                <strong class="block text-white">Fast Invoicing</strong>
+                                <span class="text-sm opacity-80">Invoice sent to your email within 2 hours.</span>
+                            </div>
                         </li>
                     </ul>
-
-                    <!-- THE GOOGLE FORM LINK BUTTON -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6T0n_mii_LLxKgmsdiPveNIUdTd-cPIp0BtdiSA_Pnfx6-g/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center gap-3 bg-white text-coffee-900 text-lg font-bold py-4 px-8 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                        <span class="relative z-10 flex items-center gap-2">
-                            Open Order Form <i class="fa-solid fa-arrow-up-right-from-square text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                        </span>
-                        <div class="absolute inset-0 bg-coffee-100 transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out z-0"></div>
-                    </a>
-                    <p class="text-xs text-coffee-400 mt-4 opacity-80">*Link opens securely in a new tab</p>
                 </div>
 
-                <!-- Right Image -->
-                <div class="md:w-2/5 min-h-[300px] bg-[url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')] bg-cover bg-center">
+                <!-- Right Content: The HTML Form -->
+                <div class="bg-white md:w-7/12 p-8 md:p-12">
+                    <form id="coffeeOrderForm" class="space-y-6">
+                        
+                        <!-- Name & Email Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="fullName" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required placeholder="John Doe" 
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee-500 focus:border-coffee-500 outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required placeholder="john@example.com" 
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee-500 focus:border-coffee-500 outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <!-- Blend Selection -->
+                        <div>
+                            <label for="blendSelect" class="block text-sm font-semibold text-gray-700 mb-2">Select your favorite blend</label>
+                            <select id="blendSelect" name="blend" required 
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee-500 focus:border-coffee-500 outline-none transition-colors cursor-pointer appearance-none">
+                                <option value="" disabled selected>Choose a blend...</option>
+                                <option value="Colombian Supremo">Colombian Supremo - Medium Roast</option>
+                                <option value="Ethiopian Yirgacheffe">Ethiopian Yirgacheffe - Light Roast</option>
+                                <option value="Midnight Espresso Blend">Midnight Espresso - Dark Roast</option>
+                            </select>
+                        </div>
+
+                        <!-- Grind Selection -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Choose whole bean or your preferred grind</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-coffee-50 transition-colors has-[:checked]:border-coffee-500 has-[:checked]:bg-coffee-50">
+                                    <input type="radio" name="grind" value="Whole Bean" required class="w-4 h-4 text-coffee-600 border-gray-300 focus:ring-coffee-500">
+                                    <span class="text-sm font-medium text-gray-700">Whole Bean</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-coffee-50 transition-colors has-[:checked]:border-coffee-500 has-[:checked]:bg-coffee-50">
+                                    <input type="radio" name="grind" value="Ground Filter" required class="w-4 h-4 text-coffee-600 border-gray-300 focus:ring-coffee-500">
+                                    <span class="text-sm font-medium text-gray-700">Ground (Filter)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-coffee-50 transition-colors has-[:checked]:border-coffee-500 has-[:checked]:bg-coffee-50">
+                                    <input type="radio" name="grind" value="Ground Espresso" required class="w-4 h-4 text-coffee-600 border-gray-300 focus:ring-coffee-500">
+                                    <span class="text-sm font-medium text-gray-700">Ground (Espresso)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div>
+                            <label for="address" class="block text-sm font-semibold text-gray-700 mb-2">Shipping Address</label>
+                            <textarea id="address" name="address" required rows="3" placeholder="123 Coffee Street, City, ZIP Code" 
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee-500 focus:border-coffee-500 outline-none transition-colors resize-none"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitBtn" class="w-full bg-coffee-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-coffee-700 transition-all shadow-md hover:shadow-lg flex justify-center items-center gap-2">
+                            <span>Place Order Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center text-sm font-medium">
+                            <i class="fa-solid fa-circle-check mr-1 text-lg align-middle"></i>
+                            Success! Your order has been placed. We will email your invoice shortly.
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
@@ -282,7 +346,7 @@
                         <li><a href="#home" class="hover:text-coffee-400 transition-colors">Home</a></li>
                         <li><a href="#products" class="hover:text-coffee-400 transition-colors">Shop Coffee</a></li>
                         <li><a href="#about" class="hover:text-coffee-400 transition-colors">Our Story</a></li>
-                        <li><a href="#order" class="hover:text-coffee-400 transition-colors">Order via Form</a></li>
+                        <li><a href="#order" class="hover:text-coffee-400 transition-colors">Order Online</a></li>
                     </ul>
                 </div>
                 
@@ -353,6 +417,47 @@
                 navbar.classList.add('shadow-sm');
                 navbar.classList.remove('shadow-md');
             }
+        });
+
+        // Automatically select dropdown value when clicking "Select This Blend" on product cards
+        function selectBlend(blendName) {
+            const dropdown = document.getElementById('blendSelect');
+            for(let i = 0; i < dropdown.options.length; i++) {
+                if(dropdown.options[i].value === blendName) {
+                    dropdown.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // Form Submission Logic
+        const form = document.getElementById('coffeeOrderForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent page reload
+
+            // Change button state to show loading
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            // Simulate sending data (since we aren't hooked to a backend yet)
+            setTimeout(() => {
+                // Show success message
+                successMessage.classList.remove('hidden');
+                
+                // Reset form and button
+                form.reset();
+                submitBtn.innerHTML = '<span>Place Order Now</span><i class="fa-solid fa-arrow-right"></i>';
+                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+
+            }, 1500); // 1.5 second simulated loading time
         });
     </script>
 </body>
